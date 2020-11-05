@@ -17,8 +17,8 @@
     <EntitySetMapping Name="Events">
       <EntityTypeMapping TypeName="DatabaseModel.Event">
         <MappingFragment StoreEntitySet="Event">
-          <ScalarProperty Name="MeetId" ColumnName="MeetId" />
           <ScalarProperty Name="EventId" ColumnName="EventId" />
+          <ScalarProperty Name="MeetId" ColumnName="MeetId" />
           <ScalarProperty Name="AgeRange" ColumnName="AgeRange" />
           <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="Distance" ColumnName="Distance" />

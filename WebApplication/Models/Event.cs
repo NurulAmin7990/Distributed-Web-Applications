@@ -21,15 +21,15 @@ namespace WebApplication.Models
         }
     
         public int EventId { get; set; }
+        public int MeetId { get; set; }
         public int AgeRange { get; set; }
         public string Gender { get; set; }
         public int Distance { get; set; }
         public string Stroke { get; set; }
         public int Round { get; set; }
-        public int MeetId { get; set; }
     
+        public virtual Meet Meet { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Participant> Participants { get; set; }
-        public virtual Meet Meet { get; set; }
     }
 }

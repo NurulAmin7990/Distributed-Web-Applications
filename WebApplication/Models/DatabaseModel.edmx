@@ -182,14 +182,14 @@
             <PropertyRef Name="EventId" />
           </Key>
           <Property Name="EventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MeetId" Type="Int32" Nullable="false" />
           <Property Name="AgeRange" Type="Int32" Nullable="false" />
           <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Distance" Type="Int32" Nullable="false" />
           <Property Name="Stroke" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Round" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Meet" Relationship="Self.FK_Event_Meet" FromRole="Event" ToRole="Meet" />
           <NavigationProperty Name="Participants" Relationship="Self.FK_Participant_Event" FromRole="Event" ToRole="Participant" />
-          <Property Name="MeetId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Meet" Relationship="DatabaseModel.FK_Event_Meet" FromRole="Event" ToRole="Meet" />
         </EntityType>
         <EntityType Name="Family">
           <Key>
@@ -213,7 +213,7 @@
           <Property Name="Venue" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="PoolLength" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Events" Relationship="DatabaseModel.FK_Event_Meet" FromRole="Meet" ToRole="Event" />
+          <NavigationProperty Name="Events" Relationship="Self.FK_Event_Meet" FromRole="Meet" ToRole="Event" />
         </EntityType>
         <EntityType Name="Parent">
           <Key>
@@ -263,6 +263,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Event_Meet">
+          <End Role="Meet" Type="Self.Meet" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meet">
+              <PropertyRef Name="MeetId" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="MeetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Participant_Event">
           <End Role="Event" Type="Self.Event" Multiplicity="1" />
           <End Role="Participant" Type="Self.Participant" Multiplicity="*" />
@@ -302,6 +314,10 @@
             <End Role="Children" EntitySet="Children" />
             <End Role="Participant" EntitySet="Participants" />
           </AssociationSet>
+          <AssociationSet Name="FK_Event_Meet" Association="Self.FK_Event_Meet">
+            <End Role="Meet" EntitySet="Meets" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
           <AssociationSet Name="FK_Participant_Event" Association="Self.FK_Participant_Event">
             <End Role="Event" EntitySet="Events" />
             <End Role="Participant" EntitySet="Participants" />
@@ -310,23 +326,7 @@
             <End Role="Family" EntitySet="Families" />
             <End Role="Parent" EntitySet="Parents" />
           </AssociationSet>
-          <AssociationSet Name="FK_Event_Meet" Association="DatabaseModel.FK_Event_Meet">
-            <End Role="Meet" EntitySet="Meets" />
-            <End Role="Event" EntitySet="Events" />
-          </AssociationSet>
         </EntityContainer>
-        <Association Name="FK_Event_Meet">
-          <End Type="DatabaseModel.Meet" Role="Meet" Multiplicity="1" />
-          <End Type="DatabaseModel.Event" Role="Event" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Meet">
-              <PropertyRef Name="MeetId" />
-            </Principal>
-            <Dependent Role="Event">
-              <PropertyRef Name="MeetId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -349,8 +349,8 @@
           <EntitySetMapping Name="Events">
             <EntityTypeMapping TypeName="DatabaseModel.Event">
               <MappingFragment StoreEntitySet="Event">
-                <ScalarProperty Name="MeetId" ColumnName="MeetId" />
                 <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="MeetId" ColumnName="MeetId" />
                 <ScalarProperty Name="AgeRange" ColumnName="AgeRange" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Distance" ColumnName="Distance" />
