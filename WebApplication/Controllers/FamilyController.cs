@@ -20,7 +20,7 @@ namespace WebApplication.Controllers
             return View(db.Families.ToList());
         }
 
-        // GET: Family/Details/5
+        // GET: Family/Details/1
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -42,8 +42,6 @@ namespace WebApplication.Controllers
         }
 
         // POST: Family/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "FamilyId,ContactNumber,Email,AddressLine,AddressArea,AddressPostcode")] Family family)
@@ -58,7 +56,7 @@ namespace WebApplication.Controllers
             return View(family);
         }
 
-        // GET: Family/Edit/5
+        // GET: Family/Edit/1
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,9 +71,7 @@ namespace WebApplication.Controllers
             return View(family);
         }
 
-        // POST: Family/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Family/Edit/1
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "FamilyId,ContactNumber,Email,AddressLine,AddressArea,AddressPostcode")] Family family)
@@ -89,7 +85,7 @@ namespace WebApplication.Controllers
             return View(family);
         }
 
-        // GET: Family/Delete/5
+        // GET: Family/Delete/1
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -104,7 +100,7 @@ namespace WebApplication.Controllers
             return View(family);
         }
 
-        // POST: Family/Delete/5
+        // POST: Family/Delete/1
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -115,6 +111,7 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index");
         }
 
+        //Drop all tables
         protected override void Dispose(bool disposing)
         {
             if (disposing)

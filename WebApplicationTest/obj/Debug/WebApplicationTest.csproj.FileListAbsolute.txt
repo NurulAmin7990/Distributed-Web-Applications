@@ -30,3 +30,6 @@ C:\Users\Nurul Amin\Documents\Project\Distributed-Web-Applications\WebApplicatio
 C:\Users\Nurul Amin\Documents\Project\Distributed-Web-Applications\WebApplicationTest\obj\Debug\WebApplicationTest.csproj.CopyComplete
 C:\Users\Nurul Amin\Documents\Project\Distributed-Web-Applications\WebApplicationTest\obj\Debug\WebApplicationTest.dll
 C:\Users\Nurul Amin\Documents\Project\Distributed-Web-Applications\WebApplicationTest\obj\Debug\WebApplicationTest.pdb
+C:\Users\Nurul Amin\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\WebApplicationTest.dll.config
+C:\Users\Nurul Amin\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Nurul Amin\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\EntityFramework.SqlServer.xml

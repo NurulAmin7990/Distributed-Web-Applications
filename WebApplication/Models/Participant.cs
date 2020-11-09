@@ -11,13 +11,16 @@ namespace WebApplication.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Participant
     {
         public int ParticipantId { get; set; }
         public int EventId { get; set; }
         public int ChildrenId { get; set; }
+        [Display(Name = "Lane")]
         public int Lane { get; set; }
+        [Display(Name = "Time")]
         public System.TimeSpan Time { get; set; }
     
         public virtual Child Child { get; set; }

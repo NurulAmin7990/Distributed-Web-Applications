@@ -11,14 +11,19 @@ namespace WebApplication.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Parent
     {
         public int ParentId { get; set; }
         public int FamilyId { get; set; }
+        [Display(Name = "First name")]
         public string Firstname { get; set; }
+        [Display(Name = "Last name")]
         public string Lastname { get; set; }
+        [Display(Name = "Date of birth")]
         public System.DateTime DateOfBirth { get; set; }
+        [Display(Name = "Gender")]
         public string Gender { get; set; }
     
         public virtual Family Family { get; set; }

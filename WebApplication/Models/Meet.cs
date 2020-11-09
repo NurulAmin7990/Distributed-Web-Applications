@@ -11,7 +11,8 @@ namespace WebApplication.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Meet
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,9 +22,13 @@ namespace WebApplication.Models
         }
     
         public int MeetId { get; set; }
+        [Display(Name = "Name")]
         public string Name { get; set; }
+        [Display(Name = "Venu")]
         public string Venue { get; set; }
+        [Display(Name = "Date")]
         public System.DateTime Date { get; set; }
+        [Display(Name = "Pool length")]
         public int PoolLength { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
