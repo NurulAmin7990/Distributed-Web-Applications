@@ -7,7 +7,6 @@
 <h2>@ViewBag.Title</h2>
 
 <div>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.ContactNumber)
@@ -51,8 +50,96 @@
 
     </dl>
 </div>
+<hr />
+<h3>Parents</h3>
+@if (Model.Parents.Count() > 0)
+{
+    var parentNumber = 0;
+    foreach (var parent in Model.Parents)
+    {
+        parentNumber++;
+        <dl class="dl-horizontal">
+            <h4>Parent @parentNumber</h4>
+            <dt>
+                firstname
+            </dt>
+            <dd>
+                @parent.Firstname
+            </dd>
+            <dt>
+                Lastname
+            </dt>
+            <dd>
+                @parent.Lastname
+            </dd>
+            <dt>
+                Date of birth
+            </dt>
+            <dd>
+                @parent.DateOfBirth
+            </dd>
+            <dt>
+                Gender
+            </dt>
+            <dd>
+                @parent.Gender
+            </dd>
+        </dl>
+    }
+}
+else
+{
+    <p>This family has no parents.</p>
+}
+<hr />
+<h3>Childrens</h3>
+@if (Model.Children.Count() > 0)
+{
+    var childNumber = 0;
+    foreach (var child in Model.Children)
+    {
+        childNumber++;
+        <dl class="dl-horizontal">
+            <h4>Child @childNumber</h4>
+            <dt>
+                firstname
+            </dt>
+            <dd>
+                @child.Firstname
+            </dd>
+            <dt>
+                Lastname
+            </dt>
+            <dd>
+                @child.Lastname
+            </dd>
+            <dt>
+                Date of birth
+            </dt>
+            <dd>
+                @child.DateOfBirth
+            </dd>
+            <dt>
+                Gender
+            </dt>
+            <dd>
+                @child.Gender
+            </dd>
+            <dt>
+                Swimming permission
+            </dt>
+            <dd>
+                @child.Permission
+            </dd>
+        </dl>
+    }
+}
+else
+{
+    <p>This family has no parents.</p>
+}
+<hr />
 <p>
-    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-warning" })
-@Html.ActionLink("Edit", "Edit", new { id = Model.FamilyId }, new { @class = "btn btn-danger" })
-
+    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FamilyId }, new { @class = "btn btn-danger" })
 </p>

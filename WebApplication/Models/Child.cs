@@ -31,7 +31,7 @@ namespace WebApplication.Models
         public System.DateTime DateOfBirth { get; set; }
         [Display(Name = "Gender")]
         public string Gender { get; set; }
-        [Display(Name = "Permission")]
+        [Display(Name = "Swimming permission")]
         public bool Permission { get; set; }
     
         public virtual Family Family { get; set; }

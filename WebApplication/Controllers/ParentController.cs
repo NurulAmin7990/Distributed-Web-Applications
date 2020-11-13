@@ -53,8 +53,6 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                DateTime dt = DateTime.ParseExact(parent.DateOfBirth.ToString("dd/MM/yyyy"), "MM/dd/yyyy", CultureInfo.InvariantCulture);
-                parent.DateOfBirth = dt;
                 db.Parents.Add(parent);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -76,7 +74,7 @@ namespace WebApplication.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.FamilyId = new SelectList(db.Families, "FamilyId", "ContactNumber", parent.FamilyId);
+            ViewBag.FamilyId = new SelectList((from f in db.Families select new { familyId = f.FamilyId, familyDetail = f.AddressLine + ", " + f.AddressPostcode }), "FamilyId", "familyDetail");
             return View(parent);
         }
 

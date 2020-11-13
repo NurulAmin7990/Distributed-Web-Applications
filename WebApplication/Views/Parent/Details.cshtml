@@ -1,13 +1,12 @@
 ﻿@model WebApplication.Models.Parent
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Parent details";
 }
 
-<h2>Details</h2>
+<h2>@ViewBag.Title</h2>
 
 <div>
-    <h4>Parent</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -49,10 +48,38 @@
         <dd>
             @Html.DisplayFor(model => model.Family.ContactNumber)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Family.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Family.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Family.AddressLine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Family.AddressLine)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Family.AddressArea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Family.AddressArea)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Family.AddressPostcode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Family.AddressPostcode)
+        </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ParentId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ParentId }, new { @class = "btn btn-danger" })
 </p>

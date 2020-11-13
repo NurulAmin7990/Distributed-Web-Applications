@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ChildrenController.cs" />
     <Compile Include="Controllers\FamilyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ParentController.cs" />
@@ -209,6 +210,12 @@
     <Content Include="Views\Parent\Details.cshtml" />
     <Content Include="Views\Parent\Edit.cshtml" />
     <Content Include="Views\Parent\Index.cshtml" />
+    <Content Include="Views\Children\Create.cshtml" />
+    <Content Include="Views\Children\Delete.cshtml" />
+    <Content Include="Views\Children\Details.cshtml" />
+    <Content Include="Views\Children\Edit.cshtml" />
+    <Content Include="Views\Children\Index.cshtml" />
+    <Content Include="Views\Family\Overview.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

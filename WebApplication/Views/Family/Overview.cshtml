@@ -1,0 +1,47 @@
+﻿@model IEnumerable<WebApplication.Models.Family>
+@{
+    ViewBag.Title = "Family overview";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<h3>Family details</h3>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddressLine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddressArea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddressPostcode)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressLine)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressPostcode)
+            </td>
+        </tr>
+    }
+</table>
