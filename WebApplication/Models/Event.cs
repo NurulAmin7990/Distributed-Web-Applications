@@ -11,8 +11,7 @@ namespace WebApplication.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Event
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,16 +22,13 @@ namespace WebApplication.Models
     
         public int EventId { get; set; }
         public int MeetId { get; set; }
-        [Display(Name = "Age range")]
         public int AgeRange { get; set; }
-        [Display(Name = "Gender")]
         public string Gender { get; set; }
-        [Display(Name = "Distance")]
         public int Distance { get; set; }
-        [Display(Name = "Stroke")]
         public string Stroke { get; set; }
-        [Display(Name = "Round")]
         public int Round { get; set; }
+        public System.TimeSpan StartTime { get; set; }
+        public System.TimeSpan EndTime { get; set; }
     
         public virtual Meet Meet { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

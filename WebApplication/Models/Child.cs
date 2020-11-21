@@ -11,8 +11,7 @@ namespace WebApplication.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Child
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,15 +22,10 @@ namespace WebApplication.Models
     
         public int ChildrenId { get; set; }
         public int FamilyId { get; set; }
-        [Display(Name = "First name")]
         public string Firstname { get; set; }
-        [Display(Name = "Last name")]
         public string Lastname { get; set; }
-        [Display(Name = "Date of birth")]
         public System.DateTime DateOfBirth { get; set; }
-        [Display(Name = "Gender")]
         public string Gender { get; set; }
-        [Display(Name = "Swimming permission")]
         public bool Permission { get; set; }
     
         public virtual Family Family { get; set; }

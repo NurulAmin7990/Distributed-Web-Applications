@@ -8,7 +8,7 @@
     <Property Name="FamilyId" Type="Int32" Nullable="false" />
     <Property Name="Firstname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="Permission" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Family" Relationship="Self.FK_Children_Family" FromRole="Children" ToRole="Family" />
@@ -27,6 +27,8 @@
     <Property Name="Round" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Meet" Relationship="Self.FK_Event_Meet" FromRole="Event" ToRole="Meet" />
     <NavigationProperty Name="Participants" Relationship="Self.FK_Participant_Event" FromRole="Event" ToRole="Participant" />
+    <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
   </EntityType>
   <EntityType Name="Family">
     <Key>
@@ -46,9 +48,9 @@
       <PropertyRef Name="MeetId" />
     </Key>
     <Property Name="MeetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Venue" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Venue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="PoolLength" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Events" Relationship="Self.FK_Event_Meet" FromRole="Meet" ToRole="Event" />
   </EntityType>
@@ -60,7 +62,7 @@
     <Property Name="FamilyId" Type="Int32" Nullable="false" />
     <Property Name="Firstname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Family" Relationship="Self.FK_Parent_Family" FromRole="Parent" ToRole="Family" />
   </EntityType>
@@ -77,7 +79,9 @@
     <NavigationProperty Name="Event" Relationship="Self.FK_Participant_Event" FromRole="Participant" ToRole="Event" />
   </EntityType>
   <Association Name="FK_Children_Family">
-    <End Role="Family" Type="Self.Family" Multiplicity="1" />
+    <End Role="Family" Type="Self.Family" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Children" Type="Self.Child" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Family">
@@ -125,7 +129,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Parent_Family">
-    <End Role="Family" Type="Self.Family" Multiplicity="1" />
+    <End Role="Family" Type="Self.Family" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Parent" Type="Self.Parent" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Family">
@@ -163,5 +169,18 @@
       <End Role="Family" EntitySet="Families" />
       <End Role="Parent" EntitySet="Parents" />
     </AssociationSet>
+    <EntitySet Name="Archives" EntityType="DatabaseModel.Archive" />
   </EntityContainer>
+  <EntityType Name="Archive">
+    <Key>
+      <PropertyRef Name="ArchiveId" />
+    </Key>
+    <Property Name="ArchiveId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Firstname" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Lastname" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Permission" Type="Boolean" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

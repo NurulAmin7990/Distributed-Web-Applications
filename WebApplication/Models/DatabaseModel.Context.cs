@@ -16,7 +16,7 @@ namespace WebApplication.Models
     public partial class DatabaseEntities : DbContext
     {
         public DatabaseEntities()
-            : base("DatabaseEntities")
+            : base("name=DatabaseEntities")
         {
         }
     
@@ -31,5 +31,6 @@ namespace WebApplication.Models
         public virtual DbSet<Meet> Meets { get; set; }
         public virtual DbSet<Parent> Parents { get; set; }
         public virtual DbSet<Participant> Participants { get; set; }
+        public virtual DbSet<Archive> Archives { get; set; }
     }
 }

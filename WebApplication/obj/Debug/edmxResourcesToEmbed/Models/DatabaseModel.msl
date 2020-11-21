@@ -2,7 +2,7 @@
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseEntities">
     <EntitySetMapping Name="Children">
-      <EntityTypeMapping TypeName="DatabaseModel.Child">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Child)">
         <MappingFragment StoreEntitySet="Children">
           <ScalarProperty Name="ChildrenId" ColumnName="ChildrenId" />
           <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
@@ -15,8 +15,10 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Events">
-      <EntityTypeMapping TypeName="DatabaseModel.Event">
-        <MappingFragment StoreEntitySet="Event">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Event)">
+        <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
           <ScalarProperty Name="EventId" ColumnName="EventId" />
           <ScalarProperty Name="MeetId" ColumnName="MeetId" />
           <ScalarProperty Name="AgeRange" ColumnName="AgeRange" />
@@ -28,8 +30,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Families">
-      <EntityTypeMapping TypeName="DatabaseModel.Family">
-        <MappingFragment StoreEntitySet="Family">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Family)">
+        <MappingFragment StoreEntitySet="Families">
           <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
           <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
           <ScalarProperty Name="Email" ColumnName="Email" />
@@ -40,8 +42,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Meets">
-      <EntityTypeMapping TypeName="DatabaseModel.Meet">
-        <MappingFragment StoreEntitySet="Meet">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Meet)">
+        <MappingFragment StoreEntitySet="Meets">
           <ScalarProperty Name="MeetId" ColumnName="MeetId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Venue" ColumnName="Venue" />
@@ -51,8 +53,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Parents">
-      <EntityTypeMapping TypeName="DatabaseModel.Parent">
-        <MappingFragment StoreEntitySet="Parent">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Parent)">
+        <MappingFragment StoreEntitySet="Parents">
           <ScalarProperty Name="ParentId" ColumnName="ParentId" />
           <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
           <ScalarProperty Name="Firstname" ColumnName="Firstname" />
@@ -63,13 +65,26 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Participants">
-      <EntityTypeMapping TypeName="DatabaseModel.Participant">
-        <MappingFragment StoreEntitySet="Participant">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Participant)">
+        <MappingFragment StoreEntitySet="Participants">
           <ScalarProperty Name="ParticipantId" ColumnName="ParticipantId" />
           <ScalarProperty Name="EventId" ColumnName="EventId" />
           <ScalarProperty Name="ChildrenId" ColumnName="ChildrenId" />
           <ScalarProperty Name="Lane" ColumnName="Lane" />
           <ScalarProperty Name="Time" ColumnName="Time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Archives">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Archive)">
+        <MappingFragment StoreEntitySet="Archives">
+          <ScalarProperty Name="ArchiveId" ColumnName="ArchiveId" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Permission" ColumnName="Permission" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -121,6 +121,32 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index");
         }
 
+        // POST: Parent/Archive/5
+        public ActionResult Archive(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Parent parent = db.Parents.Find(id);
+            if (parent == null)
+            {
+                return HttpNotFound();
+            }
+            Archive archive = new Archive
+            {
+                DateOfBirth = parent.DateOfBirth,
+                Firstname = parent.Firstname,
+                Lastname = parent.Lastname,
+                Gender = parent.Gender,
+                Type = "Parent"
+            };
+            db.Archives.Add(archive);
+            db.Parents.Remove(parent);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -129,11 +155,5 @@ namespace WebApplication.Controllers
             }
             base.Dispose(disposing);
         }
-        enum Gender
-        {
-            Male,
-            Female
-        }
-
 }
 }

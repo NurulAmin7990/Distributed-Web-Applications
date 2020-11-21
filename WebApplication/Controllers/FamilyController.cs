@@ -106,10 +106,10 @@ namespace WebApplication.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Family family = db.Families.Find(id);
-            db.Families.Remove(family);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+                db.Families.Remove(family);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
         //Drop all tables
         protected override void Dispose(bool disposing)

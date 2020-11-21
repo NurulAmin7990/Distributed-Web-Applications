@@ -120,6 +120,33 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index");
         }
 
+        // POST: Parent/Archive/5
+        public ActionResult Archive(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Child child = db.Children.Find(id);
+            if (child == null)
+            {
+                return HttpNotFound();
+            }
+            Archive archive = new Archive
+            {
+                DateOfBirth = child.DateOfBirth,
+                Firstname = child.Firstname,
+                Lastname = child.Lastname,
+                Gender = child.Gender,
+                Permission = child.Permission,
+                Type = "Child"
+            };
+            db.Archives.Add(archive);
+            db.Children.Remove(child);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

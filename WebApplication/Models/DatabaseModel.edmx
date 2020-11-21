@@ -5,6 +5,18 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Archives">
+          <Key>
+            <PropertyRef Name="ArchiveId" />
+          </Key>
+          <Property Name="ArchiveId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Firstname" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Lastname" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Permission" Type="bit" />
+          <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="Children">
           <Key>
             <PropertyRef Name="ChildrenId" />
@@ -13,11 +25,11 @@
           <Property Name="FamilyId" Type="int" Nullable="false" />
           <Property Name="Firstname" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Lastname" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
           <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Permission" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="Event">
+        <EntityType Name="Events">
           <Key>
             <PropertyRef Name="EventId" />
           </Key>
@@ -28,8 +40,10 @@
           <Property Name="Distance" Type="int" Nullable="false" />
           <Property Name="Stroke" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Round" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
         </EntityType>
-        <EntityType Name="Family">
+        <EntityType Name="Families">
           <Key>
             <PropertyRef Name="FamilyId" />
           </Key>
@@ -40,17 +54,17 @@
           <Property Name="AddressArea" Type="nvarchar(max)" />
           <Property Name="AddressPostcode" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="Meet">
+        <EntityType Name="Meets">
           <Key>
             <PropertyRef Name="MeetId" />
           </Key>
           <Property Name="MeetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="1" Nullable="false" />
-          <Property Name="Venue" Type="nvarchar" MaxLength="1" Nullable="false" />
-          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Venue" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="PoolLength" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Parent">
+        <EntityType Name="Parents">
           <Key>
             <PropertyRef Name="ParentId" />
           </Key>
@@ -58,10 +72,10 @@
           <Property Name="FamilyId" Type="int" Nullable="false" />
           <Property Name="Firstname" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Lastname" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
           <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
-        <EntityType Name="Participant">
+        <EntityType Name="Participants">
           <Key>
             <PropertyRef Name="ParticipantId" />
           </Key>
@@ -72,10 +86,12 @@
           <Property Name="Time" Type="time" Precision="7" Nullable="false" />
         </EntityType>
         <Association Name="FK_Children_Family">
-          <End Role="Family" Type="Self.Family" Multiplicity="1" />
+          <End Role="Families" Type="Self.Families" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Children" Type="Self.Children" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Family">
+            <Principal Role="Families">
               <PropertyRef Name="FamilyId" />
             </Principal>
             <Dependent Role="Children">
@@ -84,79 +100,84 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Event_Meet">
-          <End Role="Meet" Type="Self.Meet" Multiplicity="1" />
-          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <End Role="Meets" Type="Self.Meets" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Meet">
+            <Principal Role="Meets">
               <PropertyRef Name="MeetId" />
             </Principal>
-            <Dependent Role="Event">
+            <Dependent Role="Events">
               <PropertyRef Name="MeetId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Parent_Family">
-          <End Role="Family" Type="Self.Family" Multiplicity="1" />
-          <End Role="Parent" Type="Self.Parent" Multiplicity="*" />
+          <End Role="Families" Type="Self.Families" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Parents" Type="Self.Parents" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Family">
+            <Principal Role="Families">
               <PropertyRef Name="FamilyId" />
             </Principal>
-            <Dependent Role="Parent">
+            <Dependent Role="Parents">
               <PropertyRef Name="FamilyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Participant_Children">
           <End Role="Children" Type="Self.Children" Multiplicity="1" />
-          <End Role="Participant" Type="Self.Participant" Multiplicity="*" />
+          <End Role="Participants" Type="Self.Participants" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Children">
               <PropertyRef Name="ChildrenId" />
             </Principal>
-            <Dependent Role="Participant">
+            <Dependent Role="Participants">
               <PropertyRef Name="ChildrenId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Participant_Event">
-          <End Role="Event" Type="Self.Event" Multiplicity="1" />
-          <End Role="Participant" Type="Self.Participant" Multiplicity="*" />
+          <End Role="Events" Type="Self.Events" Multiplicity="1" />
+          <End Role="Participants" Type="Self.Participants" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Event">
+            <Principal Role="Events">
               <PropertyRef Name="EventId" />
             </Principal>
-            <Dependent Role="Participant">
+            <Dependent Role="Participants">
               <PropertyRef Name="EventId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DatabaseModelStoreContainer">
+          <EntitySet Name="Archives" EntityType="Self.Archives" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Children" EntityType="Self.Children" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Family" EntityType="Self.Family" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Meet" EntityType="Self.Meet" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Parent" EntityType="Self.Parent" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Participant" EntityType="Self.Participant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Families" EntityType="Self.Families" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meets" EntityType="Self.Meets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parents" EntityType="Self.Parents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participants" EntityType="Self.Participants" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Children_Family" Association="Self.FK_Children_Family">
-            <End Role="Family" EntitySet="Family" />
+            <End Role="Families" EntitySet="Families" />
             <End Role="Children" EntitySet="Children" />
           </AssociationSet>
           <AssociationSet Name="FK_Event_Meet" Association="Self.FK_Event_Meet">
-            <End Role="Meet" EntitySet="Meet" />
-            <End Role="Event" EntitySet="Event" />
+            <End Role="Meets" EntitySet="Meets" />
+            <End Role="Events" EntitySet="Events" />
           </AssociationSet>
           <AssociationSet Name="FK_Parent_Family" Association="Self.FK_Parent_Family">
-            <End Role="Family" EntitySet="Family" />
-            <End Role="Parent" EntitySet="Parent" />
+            <End Role="Families" EntitySet="Families" />
+            <End Role="Parents" EntitySet="Parents" />
           </AssociationSet>
           <AssociationSet Name="FK_Participant_Children" Association="Self.FK_Participant_Children">
             <End Role="Children" EntitySet="Children" />
-            <End Role="Participant" EntitySet="Participant" />
+            <End Role="Participants" EntitySet="Participants" />
           </AssociationSet>
           <AssociationSet Name="FK_Participant_Event" Association="Self.FK_Participant_Event">
-            <End Role="Event" EntitySet="Event" />
-            <End Role="Participant" EntitySet="Participant" />
+            <End Role="Events" EntitySet="Events" />
+            <End Role="Participants" EntitySet="Participants" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -171,7 +192,7 @@
           <Property Name="FamilyId" Type="Int32" Nullable="false" />
           <Property Name="Firstname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Permission" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Family" Relationship="Self.FK_Children_Family" FromRole="Children" ToRole="Family" />
@@ -190,6 +211,8 @@
           <Property Name="Round" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Meet" Relationship="Self.FK_Event_Meet" FromRole="Event" ToRole="Meet" />
           <NavigationProperty Name="Participants" Relationship="Self.FK_Participant_Event" FromRole="Event" ToRole="Participant" />
+          <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
         </EntityType>
         <EntityType Name="Family">
           <Key>
@@ -209,9 +232,9 @@
             <PropertyRef Name="MeetId" />
           </Key>
           <Property Name="MeetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Venue" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Venue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PoolLength" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Events" Relationship="Self.FK_Event_Meet" FromRole="Meet" ToRole="Event" />
         </EntityType>
@@ -223,7 +246,7 @@
           <Property Name="FamilyId" Type="Int32" Nullable="false" />
           <Property Name="Firstname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Family" Relationship="Self.FK_Parent_Family" FromRole="Parent" ToRole="Family" />
         </EntityType>
@@ -240,8 +263,11 @@
           <NavigationProperty Name="Event" Relationship="Self.FK_Participant_Event" FromRole="Participant" ToRole="Event" />
         </EntityType>
         <Association Name="FK_Children_Family">
-          <End Role="Family" Type="Self.Family" Multiplicity="1" />
-          <End Role="Children" Type="Self.Child" Multiplicity="*" />
+          <End Role="Family" Type="Self.Family" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Children" Type="Self.Child" Multiplicity="*" >
+          </End>
           <ReferentialConstraint>
             <Principal Role="Family">
               <PropertyRef Name="FamilyId" />
@@ -288,8 +314,11 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Parent_Family">
-          <End Role="Family" Type="Self.Family" Multiplicity="1" />
-          <End Role="Parent" Type="Self.Parent" Multiplicity="*" />
+          <End Role="Family" Type="Self.Family" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Parent" Type="Self.Parent" Multiplicity="*" >
+          </End>
           <ReferentialConstraint>
             <Principal Role="Family">
               <PropertyRef Name="FamilyId" />
@@ -326,88 +355,115 @@
             <End Role="Family" EntitySet="Families" />
             <End Role="Parent" EntitySet="Parents" />
           </AssociationSet>
+          <EntitySet Name="Archives" EntityType="DatabaseModel.Archive" />
         </EntityContainer>
+        <EntityType Name="Archive">
+          <Key>
+            <PropertyRef Name="ArchiveId" />
+          </Key>
+          <Property Name="ArchiveId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Lastname" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Permission" Type="Boolean" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseEntities">
-          <EntitySetMapping Name="Children">
-            <EntityTypeMapping TypeName="DatabaseModel.Child">
-              <MappingFragment StoreEntitySet="Children">
-                <ScalarProperty Name="ChildrenId" ColumnName="ChildrenId" />
-                <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
-                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
-                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Permission" ColumnName="Permission" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Events">
-            <EntityTypeMapping TypeName="DatabaseModel.Event">
-              <MappingFragment StoreEntitySet="Event">
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseEntities">
+    <EntitySetMapping Name="Children">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Child)">
+        <MappingFragment StoreEntitySet="Children">
+          <ScalarProperty Name="ChildrenId" ColumnName="ChildrenId" />
+          <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Permission" ColumnName="Permission" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Events">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Event)">
+        <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="EventId" ColumnName="EventId" />
-                <ScalarProperty Name="MeetId" ColumnName="MeetId" />
-                <ScalarProperty Name="AgeRange" ColumnName="AgeRange" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Distance" ColumnName="Distance" />
-                <ScalarProperty Name="Stroke" ColumnName="Stroke" />
-                <ScalarProperty Name="Round" ColumnName="Round" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Families">
-            <EntityTypeMapping TypeName="DatabaseModel.Family">
-              <MappingFragment StoreEntitySet="Family">
-                <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
-                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="AddressLine" ColumnName="AddressLine" />
-                <ScalarProperty Name="AddressArea" ColumnName="AddressArea" />
-                <ScalarProperty Name="AddressPostcode" ColumnName="AddressPostcode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Meets">
-            <EntityTypeMapping TypeName="DatabaseModel.Meet">
-              <MappingFragment StoreEntitySet="Meet">
-                <ScalarProperty Name="MeetId" ColumnName="MeetId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Venue" ColumnName="Venue" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="PoolLength" ColumnName="PoolLength" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Parents">
-            <EntityTypeMapping TypeName="DatabaseModel.Parent">
-              <MappingFragment StoreEntitySet="Parent">
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
-                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
-                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Participants">
-            <EntityTypeMapping TypeName="DatabaseModel.Participant">
-              <MappingFragment StoreEntitySet="Participant">
-                <ScalarProperty Name="ParticipantId" ColumnName="ParticipantId" />
-                <ScalarProperty Name="EventId" ColumnName="EventId" />
-                <ScalarProperty Name="ChildrenId" ColumnName="ChildrenId" />
-                <ScalarProperty Name="Lane" ColumnName="Lane" />
-                <ScalarProperty Name="Time" ColumnName="Time" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+          <ScalarProperty Name="MeetId" ColumnName="MeetId" />
+          <ScalarProperty Name="AgeRange" ColumnName="AgeRange" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="Stroke" ColumnName="Stroke" />
+          <ScalarProperty Name="Round" ColumnName="Round" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Families">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Family)">
+        <MappingFragment StoreEntitySet="Families">
+          <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
+          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="AddressLine" ColumnName="AddressLine" />
+          <ScalarProperty Name="AddressArea" ColumnName="AddressArea" />
+          <ScalarProperty Name="AddressPostcode" ColumnName="AddressPostcode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Meets">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Meet)">
+        <MappingFragment StoreEntitySet="Meets">
+          <ScalarProperty Name="MeetId" ColumnName="MeetId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Venue" ColumnName="Venue" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="PoolLength" ColumnName="PoolLength" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Parents">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Parent)">
+        <MappingFragment StoreEntitySet="Parents">
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Participants">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Participant)">
+        <MappingFragment StoreEntitySet="Participants">
+          <ScalarProperty Name="ParticipantId" ColumnName="ParticipantId" />
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+          <ScalarProperty Name="ChildrenId" ColumnName="ChildrenId" />
+          <ScalarProperty Name="Lane" ColumnName="Lane" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Archives">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Archive)">
+        <MappingFragment StoreEntitySet="Archives">
+          <ScalarProperty Name="ArchiveId" ColumnName="ArchiveId" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Permission" ColumnName="Permission" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -421,7 +477,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

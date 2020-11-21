@@ -11,8 +11,7 @@ namespace WebApplication.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Family
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,17 +20,12 @@ namespace WebApplication.Models
             this.Children = new HashSet<Child>();
             this.Parents = new HashSet<Parent>();
         }
-
+    
         public int FamilyId { get; set; }
-        [Display(Name = "Contact number")]
         public string ContactNumber { get; set; }
-        [Display(Name = "Email")]
         public string Email { get; set; }
-        [Display(Name = "Address line")]
         public string AddressLine { get; set; }
-        [Display(Name = "Address area")]
         public string AddressArea { get; set; }
-        [Display(Name = "Address postcode")]
         public string AddressPostcode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

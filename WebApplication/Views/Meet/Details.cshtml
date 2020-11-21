@@ -1,0 +1,49 @@
+﻿@model WebApplication.Models.Meet
+
+@{
+    ViewBag.Title = "Meet details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Venue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Venue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PoolLength)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PoolLength)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MeetId }, new { @class = "btn btn-danger" })
+</p>

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<WebApplication.Models.Meet>
+
+@{
+    ViewBag.Title = "Meet";
+}
+
+<h2>@ViewBag.Title Dashboard</h2>
+
+<p>
+    @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary" })
+</p>
+@if (Model.Count() > 0)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Venue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PoolLength)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Venue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PoolLength)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MeetId }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Details", "Details", new { id = item.MeetId }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MeetId }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <p>No meet can be found, please create a meet.</p>
+}

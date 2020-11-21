@@ -16,6 +16,7 @@
         <AssociationConnector Association="DatabaseModel.FK_Event_Meet" ManuallyRouted="false" />
         <AssociationConnector Association="DatabaseModel.FK_Participant_Event" ManuallyRouted="false" />
         <AssociationConnector Association="DatabaseModel.FK_Parent_Family" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DatabaseModel.Archive" Width="1.5" PointX="5.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
