@@ -11,33 +11,16 @@ namespace WebApplication.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Data.SqlClient;
-    using System.Linq;
-
-    public partial class Participant:IValidatableObject
+    
+    public partial class Participant
     {
         public int ParticipantId { get; set; }
         public int EventId { get; set; }
         public int ChildrenId { get; set; }
         public int Lane { get; set; }
-        public System.TimeSpan Time { get; set; }
+        public Nullable<System.TimeSpan> Time { get; set; }
     
         public virtual Child Child { get; set; }
         public virtual Event Event { get; set; }
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-            {
-            DatabaseEntities db = new DatabaseEntities();
-        //Get all participants in specific event
-        var lane = db.Participants.ToList();
-                //check if lane is not available
-                for (int i = 0; i < lane.Count; i++)
-                {
-                    if (lane[i].Lane == Lane)
-                    {
-                    yield return new ValidationResult("Lane is not available");
-                    }
-                }
-            }
-            }
-        }
+    }
+}
