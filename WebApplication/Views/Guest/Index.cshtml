@@ -1,0 +1,114 @@
+﻿@model IEnumerable<WebApplication.Models.Event>
+
+@{
+    ViewBag.Title = "All swimming events";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    <table class="table">
+        <tr>
+            <td>Search or filter by:</td>
+            <td>
+                @Html.DropDownList("type",
+                        new List<SelectListItem> {
+                        new SelectListItem { Text = "Age", Value = "age"},
+                        new SelectListItem { Text = "Stroke", Value = "stroke"},
+                        new SelectListItem { Text = "Name", Value = "name"},
+                                new SelectListItem { Text = "Age under 14", Value = "14"},
+            new SelectListItem { Text = "Age under 16", Value = "16"},
+            new SelectListItem { Text = "5 meter distance", Value = "distance5"},
+            new SelectListItem { Text = "10 meter distance", Value = "distance10"},
+            new SelectListItem { Text = "15 meter distance", Value = "distance15"},
+            new SelectListItem { Text = "20 meter distance", Value = "distance20"},
+             new SelectListItem { Text = "25 meter distance", Value = "distance25"},
+             new SelectListItem { Text = "Male swimmers", Value = "male"},
+             new SelectListItem { Text = "Female swimmers", Value = "female"}
+                        },
+                        null,
+                        new { @class = "form-control" })
+            </td>
+            <td>
+                Search:
+            </td>
+            <td>
+                @Html.TextBox("searchString", null, new { pattern = @"([a-zA-Z]{2,30}\s*)+" })
+            </td>
+            <td>
+                Venue:
+            </td>
+            <td>
+                @Html.DropDownList("venue", new SelectList(ViewBag.Venues))
+            </td>
+            <td>
+                Date:
+            </td>
+            <td>
+                @Html.TextBox("dateRange",null, new {type = "date" })
+            </td>
+        </tr>
+
+    </table>
+    <input type="submit" value="Search" class="btn btn-primary" />
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AgeRange)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Distance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stroke)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Round)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Meet.Name)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AgeRange)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Distance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stroke)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Round)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Meet.Name)
+            </td>
+        </tr>
+    }
+
+</table>

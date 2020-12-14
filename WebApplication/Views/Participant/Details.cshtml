@@ -1,0 +1,71 @@
+﻿@model WebApplication.Models.Participant
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Lane)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lane)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Child.Firstname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Child.Firstname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Child.Lastname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Child.Lastname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Child.DateOfBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Child.DateOfBirth)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Event.Meet.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Event.Meet.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Event.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Event.Gender)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ParticipantId }, new { @class = "btn btn-danger" })
+</p>

@@ -147,6 +147,12 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult ChildrenIndex(int? id)
+        {
+            var childrens = db.Children.Include(c => c.Family);
+            var children = childrens.Where(c => c.ChildrenId == id);
+            return View(children);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

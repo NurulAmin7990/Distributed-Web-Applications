@@ -1,0 +1,77 @@
+﻿@model IEnumerable<WebApplication.Models.Child>
+@{
+    ViewBag.Title = "ChildrenIndex";
+}
+
+<h2>Your profile</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Permission)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Firstname)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Lastname)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DateOfBirth)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Gender)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Permission)
+    </td>
+</tr>
+    }
+
+</table>
+<hr>
+<h2>Your races</h2>
+<table class="table">
+    <tr>
+        <th>Event</th>
+        <th>Venu</th>
+        <th>Stoke</th>
+        <th>Pool legnth</th>
+        <th>Date</th>
+        <th>Lane</th>
+        <th>Time</th>
+    </tr>
+
+    @foreach (var child in Model)
+    {
+    foreach (var race in child.Participants)
+    {
+<tr>
+    <td>@race.Event.Meet.Name</td>
+    <td>@race.Event.Meet.Venue</td>
+    <td>@race.Event.Stroke</td>
+    <td>@race.Event.Meet.PoolLength m</td>
+    <td>@race.Event.Meet.Date</td>
+    <td>@race.Lane</td>
+    <td>@race.Time</td>
+</tr>
+    }
+            }
+    </table>
+

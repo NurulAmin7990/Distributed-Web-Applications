@@ -11,10 +11,23 @@ using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class ParentController : Controller
     {
+        //Attributes
         private DatabaseEntities db = new DatabaseEntities();
+        private IRepository<Parent> rp;
 
+        //Constructor
+        public ParentController()
+        {
+            rp = new ParentRepository();
+        }
+
+        public ParentController(IRepository<Parent> repository)
+        {
+            rp = repository;
+        }
         // GET: Parent
         public ActionResult Index()
         {
@@ -29,7 +42,7 @@ namespace WebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Parent parent = db.Parents.Find(id);
+            Parent parent = rp.Find(id);
             if (parent == null)
             {
                 return HttpNotFound();
@@ -53,8 +66,7 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Parents.Add(parent);
-                db.SaveChanges();
+                rp.Add(parent);
                 return RedirectToAction("Index");
             }
 
@@ -69,7 +81,7 @@ namespace WebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Parent parent = db.Parents.Find(id);
+            Parent parent = rp.Find(id);
             if (parent == null)
             {
                 return HttpNotFound();
@@ -87,8 +99,7 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(parent).State = EntityState.Modified;
-                db.SaveChanges();
+                rp.Update(parent);
                 return RedirectToAction("Index");
             }
             ViewBag.FamilyId = new SelectList(db.Families, "FamilyId", "ContactNumber", parent.FamilyId);
@@ -102,7 +113,7 @@ namespace WebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Parent parent = db.Parents.Find(id);
+            Parent parent = rp.Find(id);
             if (parent == null)
             {
                 return HttpNotFound();
@@ -115,8 +126,8 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Parent parent = db.Parents.Find(id);
-            db.Parents.Remove(parent);
+            Parent parent = rp.Find(id);
+            rp.Delete(parent.ParentId);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -128,7 +139,7 @@ namespace WebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Parent parent = db.Parents.Find(id);
+            Parent parent = rp.Find(id);
             if (parent == null)
             {
                 return HttpNotFound();
@@ -151,9 +162,18 @@ namespace WebApplication.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                rp.Dispose();
             }
             base.Dispose(disposing);
         }
-}
+
+
+        public ActionResult ParentIndex(int? id)
+        {
+            var parents = db.Parents.Include(p => p.Family);
+            var parent = parents.Where(p => p.ParentId == id);
+            return View(parent);
+        }
+
+    }
 }
