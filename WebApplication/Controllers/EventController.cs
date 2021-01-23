@@ -10,6 +10,7 @@ using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
+    [Authorize]
     public class EventController : Controller
     {
         private DatabaseEntities db = new DatabaseEntities();

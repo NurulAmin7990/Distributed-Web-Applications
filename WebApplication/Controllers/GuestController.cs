@@ -7,6 +7,7 @@ using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
+    [AllowAnonymous]
     public class GuestController : Controller
     {
         private DatabaseEntities db = new DatabaseEntities();

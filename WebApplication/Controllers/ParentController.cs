@@ -11,7 +11,7 @@ using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize]
     public class ParentController : Controller
     {
         //Attributes
@@ -167,13 +167,12 @@ namespace WebApplication.Controllers
             base.Dispose(disposing);
         }
 
-
+        [AllowAnonymous]
         public ActionResult ParentIndex(int? id)
         {
             var parents = db.Parents.Include(p => p.Family);
             var parent = parents.Where(p => p.ParentId == id);
             return View(parent);
         }
-
     }
 }

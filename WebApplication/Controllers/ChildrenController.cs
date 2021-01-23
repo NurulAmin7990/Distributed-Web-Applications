@@ -10,6 +10,7 @@ using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
+    [Authorize]
     public class ChildrenController : Controller
     {
         private DatabaseEntities db = new DatabaseEntities();
@@ -147,6 +148,7 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index");
         }
 
+        [AllowAnonymous]
         public ActionResult ChildrenIndex(int? id)
         {
             var childrens = db.Children.Include(c => c.Family);

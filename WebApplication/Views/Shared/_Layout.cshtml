@@ -18,6 +18,10 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("College Road Swimming Club", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Guest", "Index", "Guest", null, new { @class = "nav-link" })
+                @Html.ActionLink("Parent", "ParentIndex", "Parent", null, new { @class = "nav-link" })
+                @Html.ActionLink("Children", "ChildrenIndex", "Children", null, new { @class = "nav-link" })
+                @Html.ActionLink("Staff", "Index", "Staff", null, new { @class = "nav-link" })
             </div>
             <div class="navbar-collapse collapse">
                 @Html.Partial("_LoginPartial")

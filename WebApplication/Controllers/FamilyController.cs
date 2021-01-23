@@ -10,6 +10,7 @@ using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
+    [Authorize]
     public class FamilyController : Controller
     {
         private DatabaseEntities db = new DatabaseEntities();

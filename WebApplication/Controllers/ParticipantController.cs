@@ -11,7 +11,7 @@ using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize]
     public class ParticipantController : Controller
     {
         private DatabaseEntities db = new DatabaseEntities();

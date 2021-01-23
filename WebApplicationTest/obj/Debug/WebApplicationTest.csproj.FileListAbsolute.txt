@@ -33,10 +33,6 @@ C:\Users\Nurul Amin\Documents\Project\Distributed-Web-Applications\WebApplicatio
 C:\Users\Nurul Amin\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\WebApplicationTest.dll.config
 C:\Users\Nurul Amin\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Nurul Amin\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\EntityFramework.SqlServer.xml
-D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\obj\Debug\WebApplicationTest.csprojAssemblyReference.cache
-D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\obj\Debug\WebApplicationTest.csproj.CoreCompileInputs.cache
-D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\obj\Debug\WebApplicationTest.dll
-D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\obj\Debug\WebApplicationTest.pdb
 D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
 D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
 D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
@@ -55,6 +51,19 @@ D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\S
 D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\System.Web.WebPages.dll
 D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\System.Web.WebPages.Razor.dll
 D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\WebApplication.dll
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Microsoft.Owin.dll
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\System.Web.Optimization.dll
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Microsoft.AspNet.Identity.Owin.dll
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Microsoft.Owin.Security.dll
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Owin.dll
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Microsoft.Owin.Security.Cookies.dll
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Microsoft.Owin.Host.SystemWeb.dll
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\WebGrease.dll
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Microsoft.Owin.Security.OAuth.dll
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Newtonsoft.Json.dll
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Antlr3.Runtime.dll
 D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\WebApplication.pdb
 D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\WebApplication.dll.config
 D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\EntityFramework.xml
@@ -67,4 +76,19 @@ D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\S
 D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\System.Web.WebPages.xml
 D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\System.Web.WebPages.Deployment.xml
 D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\System.Web.WebPages.Razor.xml
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Microsoft.Owin.xml
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\System.Web.Optimization.xml
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Microsoft.AspNet.Identity.Owin.xml
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Microsoft.Owin.Security.xml
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Microsoft.Owin.Security.Cookies.xml
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Microsoft.Owin.Security.OAuth.xml
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Newtonsoft.Json.xml
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\bin\Debug\Antlr3.Runtime.pdb
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\obj\Debug\WebApplicationTest.csprojAssemblyReference.cache
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\obj\Debug\WebApplicationTest.csproj.CoreCompileInputs.cache
 D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\obj\Debug\WebApplicationTest.csproj.CopyComplete
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\obj\Debug\WebApplicationTest.dll
+D:\Documents\Project\Distributed-Web-Applications\WebApplicationTest\obj\Debug\WebApplicationTest.pdb
